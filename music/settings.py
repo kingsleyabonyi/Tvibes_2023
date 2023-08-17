@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x2q_&qq6e^2wup3h)^+ixu6_=qc@#24_jeijoz@18l-&oqo(&3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tvibes.onrender.com']
 
 
 # Application definition
