@@ -55,27 +55,27 @@ def music_detail(request, pk):
 @permission_classes([AllowAny])
 def register(request):
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         fname =  request.data['first_name']
         lname = request.data['last_name']
-        username = request.data['username']
+        # username = request.data['username']
         email = request.data['email']
         pass1 = request.data['password']
         pass2 = request.data['confirm_password']
 
-    if User.objects.filter(username=username,email=email):
-        return Response('username or email is already used', status=status.HTTP_400_BAD_REQUEST)
+    if User.objects.filter(email=email):
+        return Response('email is already used', status=status.HTTP_400_BAD_REQUEST)
     
     if pass1 != pass2:
         return Response('Inout a uniform password', status=status.HTTP_400_BAD_REQUEST)
     
-    if len(username) > 8:
-        return Response('the username is too long', status=status.HTTP_400_BAD_REQUEST)
+    # if len(username) > 8:
+    #     return Response('the username is too long', status=status.HTTP_400_BAD_REQUEST)
     
-    if not username.isalnum():
-       return Response('the username is too long', status=status.HTTP_400_BAD_REQUEST)
+    # if not username.isalnum():
+    #    return Response('the username is too long', status=status.HTTP_400_BAD_REQUEST)
 
-    user = User.objects.create_user(first_name=fname, last_name=lname, username=username, email=email, password=pass1)
+    user = User.objects.create_user(first_name=fname, last_name=lname,email=email, password=pass1)
     if user:
         token = get_token(user)
         response_data = {
@@ -96,9 +96,9 @@ def register(request):
 @permission_classes([AllowAny])
 def login(request):
     if request.method == 'POST':
-        username = request.data['username']
+        email = request.data['email']
         password = request.data['password']
-    user = authenticate(username = username, password = password)
+    user = authenticate(email = email, password = password)
     if user:
         response_data = {
             "user":{

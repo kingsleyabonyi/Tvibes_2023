@@ -44,6 +44,5 @@ class FeatureArtist(models.Model):
 
 
     def __str__(self):
-        return self.name
-
+        return f"{self.artist.name} featured in {self.music.title}"
 

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x2q_&qq6e^2wup3h)^+ixu6_=qc@#24_jeijoz@18l-&oqo(&3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tvibes.onrender.com']
+ALLOWED_HOSTS = ['tvibes.onrender.com', 'http://127.0.0.1:8000/']
 
 
 # Application definition
@@ -46,9 +46,12 @@ INSTALLED_APPS = [
     # 'cripsy_forms',
     # 'ckeditor',
     # 'pillow',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,6 +131,20 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost:8080',
+]
+
+CORS_ALLOW_METHOD = [
+    'GET', 'POST', 'PUT', 'DELETE'
+]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
