@@ -96,8 +96,9 @@ def register(request):
 @permission_classes([AllowAny])
 def login(request):
     if request.method == 'POST':
-        email = request.data['email']
-        password = request.data['password']
+        email = request.data.get('email', None)
+        print(email)
+        password = request.data.get('password', None)
     user = authenticate(email = email, password = password)
     if user:
         response_data = {
